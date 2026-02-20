@@ -1,0 +1,76 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/recipes"></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{ isEditMode ? 'Modifier la recette' : 'Nouvelle recette' }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  @if (loading) {
+    <div class="state-block">
+      <ion-spinner></ion-spinner>
+      <p>Chargement...</p>
+    </div>
+  } @else if (errorMessage) {
+    <div class="state-block state-error">
+      <p>{{ errorMessage }}</p>
+    </div>
+  } @else {
+    <form [formGroup]="form" (ngSubmit)="save()">
+      <ion-list>
+        <ion-item>
+          <ion-label position="stacked">Titre *</ion-label>
+          <ion-input formControlName="title" placeholder="Ex: Lasagnes"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="stacked">Description</ion-label>
+          <ion-textarea formControlName="description" autoGrow="true"></ion-textarea>
+        </ion-item>
+      </ion-list>
+
+      <section class="section-block">
+        <h2>Ingrédients</h2>
+        @for (control of ingredientsArray.controls; track $index) {
+          <ion-item>
+            <ion-input [formControl]="control" placeholder="Ingrédient"></ion-input>
+            <ion-button fill="clear" color="danger" (click)="removeIngredient($index)" type="button">
+              Supprimer
+            </ion-button>
+          </ion-item>
+        }
+        <ion-button expand="block" fill="outline" (click)="addIngredient()" type="button">
+          Ajouter un ingrédient
+        </ion-button>
+      </section>
+
+      <section class="section-block">
+        <h2>Étapes</h2>
+        @for (control of stepsArray.controls; track $index) {
+          <ion-item>
+            <ion-input [formControl]="control" placeholder="Étape"></ion-input>
+            <ion-button fill="clear" color="danger" (click)="removeStep($index)" type="button">
+              Supprimer
+            </ion-button>
+          </ion-item>
+        }
+        <ion-button expand="block" fill="outline" (click)="addStep()" type="button">
+          Ajouter une étape
+        </ion-button>
+      </section>
+
+      <ion-list>
+        <ion-item>
+          <ion-label position="stacked">Tags (séparés par virgule)</ion-label>
+          <ion-input formControlName="tagsText" placeholder="italien, rapide"></ion-input>
+        </ion-item>
+      </ion-list>
+
+      <ion-button expand="block" type="submit" [disabled]="submitting">
+        {{ submitting ? 'Enregistrement...' : 'Enregistrer' }}
+      </ion-button>
+    </form>
+  }
+</ion-content>

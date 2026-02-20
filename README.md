@@ -195,6 +195,44 @@ npx cap copy android
 
 ------------------------------------------------------------------------
 
+## ✅ Tests Manuels (V1 CRUD Offline)
+
+Routes principales :
+
+    /recipes
+    /recipes/new
+    /recipes/:id
+    /recipes/:id/edit
+
+Commandes :
+
+``` bash
+cd mijote-app
+ionic serve
+```
+
+``` bash
+cd mijote-app
+ionic build
+npx cap copy android
+```
+
+ou
+
+``` bash
+cd mijote-app
+ionic build
+npx cap sync android
+```
+
+Puis ouvrir Android Studio et lancer l'app Android.
+
+APK debug :
+
+    mijote-app/android/app/build/outputs/apk/debug/app-debug.apk
+
+------------------------------------------------------------------------
+
 ## 🎯 Roadmap
 
 -   CRUD complet des recettes
