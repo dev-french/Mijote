@@ -1,0 +1,7 @@
+{
+  "name": "mijote-app",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}
