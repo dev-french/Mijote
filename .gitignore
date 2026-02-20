@@ -1,0 +1,17 @@
+# Git
+.git/
+
+# IDE - JetBrains
+.idea/
+
+# OS Files
+.DS_Store
+Thumbs.db
+
+# Node
+/node_modules
+npm-debug.log
+yarn-error.log
+
+# Logs
+*.log
